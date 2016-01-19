@@ -8,5 +8,6 @@ gem 'httparty'
 
 group :development do
   gem 'awesome_print'
+  gem 'pry'
   gem 'tux'
 end
