@@ -1,8 +1,15 @@
 require_relative '../lib/date'
+require 'httparty'
+
 class Company
-  include StockSplosion
 
   attr_reader :id, :name, :symbol
+
+  BASE_URI = 'http://stocksplosion.apsis.io/api/company'
+
+  def self.read_list
+    HTTParty.get(BASE_URI)
+  end
 
   def initialize attributes
     @id = attributes['id'].to_i
