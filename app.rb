@@ -4,6 +4,6 @@ require './models/company'
 
 
 get '/' do
-  @companies = Company.read_list.map {|c| Company.new(c) }
+  @companies = Company.all.map {|c| Company.new(c) }
   erb :index
 end
