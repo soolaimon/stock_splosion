@@ -17,10 +17,10 @@ class Company
     @@all ||= HTTParty.get(BASE_URI)
   end
 
-  def read_performance
-    HTTParty.get("#{BASE_URI}/#{@symbol}")
+  def read_performance(start_date = (Date.today - 30).digify, end_date = Date.today.digify)
+    response = HTTParty.get("#{BASE_URI}/#{@symbol}?startdate=#{start_date}&enddate=#{end_date}")
+    response['prices']
   end
-
 
 end
 
