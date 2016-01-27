@@ -22,5 +22,8 @@ class Company
     response['prices']
   end
 
-end
+  def to_json
+    {id: @id, name: @name, symbol: @symbol}
+  end
 
+end
