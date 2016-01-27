@@ -2,3 +2,20 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "../bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
+
+.form {
+  margin-top: 5%;
+  width: 18%;
+  input {
+    font-size: large;
+  }
+  .tt-selectable {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .day {
+    cursor: pointer;
+  }
+}

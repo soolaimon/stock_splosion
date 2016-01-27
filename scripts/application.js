@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $('.datepicker').datepicker({
+    autoclose: true,
+    endDate: '0d',
+  });
     var search = new Bloodhound({
          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
          queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -17,12 +21,20 @@ $(document).ready(function () {
         display: 'symbol',
         source: search,
         templates: {
-          header: '<h3>Companies</h3>',
+          header: '<h3>Select a Company</h3>',
             empty: [
               '<div class="empty-message">',
-                'unable to find any Best Picture winners that match the current query',
+                'Unable to find any Best Picture winners that match the current query',
               '</div>'
             ].join('\n'),
         }
     });
+
+    $('.typeahead').bind('typeahead:select', function(event, suggestion) {
+      calculatePerformance($(this).val());
+    })
 });
+
+var calculatePerformance = function(symbol, startDate, endDate) {
+
+}

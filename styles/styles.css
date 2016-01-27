@@ -7883,4 +7883,14 @@ button.close {
 .fa-percent:before {
   content: ""; }
 
+.form {
+  margin-top: 5%;
+  width: 18%; }
+  .form input {
+    font-size: large; }
+  .form .tt-selectable:hover {
+    cursor: pointer; }
+  .form .day {
+    cursor: pointer; }
+
 /*# sourceMappingURL=styles.css.map */
