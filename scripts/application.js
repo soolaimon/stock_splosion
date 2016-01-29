@@ -81,6 +81,7 @@ var drawChart = function(data) {
     return moment(date).format('MM/DD/YYYY');
   });
   $('#company-name').text(data.company.name)
+  $('#position').text(data.position)
   var data = {
       labels: dates,
       datasets: [

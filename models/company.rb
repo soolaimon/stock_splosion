@@ -28,7 +28,7 @@ class Company
 
   def calculate data
     sum = data.reduce(:+)
-    avg = sum data.size
+    avg = sum / data.size
     if data.last > avg
       "SELL"
     elsif data.last < avg
