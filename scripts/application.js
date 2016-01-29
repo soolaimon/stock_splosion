@@ -55,17 +55,20 @@ var calculatePerformance = function(symbol, startDate, endDate) {
 }
 
 var drawChart = function(data) {
+  if (window.chart){
+    window.chart.destroy();
+  }
   var prices = [];
   var dates = $.map(Object.keys(data.prices), function (date) {
     prices.push(data.prices[date]);
     return moment(date).format('MM/DD/YYYY');
   });
-  console.log(prices);
+  $('#company-name').text(data.company.name)
   var data = {
       labels: dates,
       datasets: [
           {
-              label: "My First dataset",
+              label: data.company.name,
               fillColor: "rgba(220,220,220,0.2)",
               strokeColor: "rgba(220,220,220,1)",
               pointColor: "rgba(220,220,220,1)",
@@ -93,6 +96,7 @@ var drawChart = function(data) {
       datasetFill : true,
     };
   var ctx = document.getElementById("myChart").getContext("2d");
-  var performanceChart = new Chart(ctx).Line(data, options);
+  performanceChart = new Chart(ctx).Line(data, options);
+  window.chart = performanceChart
 
 }

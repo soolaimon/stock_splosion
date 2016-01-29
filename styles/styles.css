@@ -7895,4 +7895,8 @@ button.close {
 .day {
   cursor: pointer; }
 
+#company-name {
+  margin: 0 auto;
+  text-emphasis: center; }
+
 /*# sourceMappingURL=styles.css.map */
