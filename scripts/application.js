@@ -33,6 +33,9 @@ var loadSearcher = function() {
       $(this).trigger('typeahead:close');
       calculatePerformance();
     });
+   $('.typeahead').bind('typeahead:open', function() {
+     $('#position').empty();
+   })
 }
 
 var calculatePerformance = function() {
