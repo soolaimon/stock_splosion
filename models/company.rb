@@ -1,5 +1,6 @@
 require_relative '../lib/date'
 require 'httparty'
+require 'pry' if development?
 
 class Company
 
@@ -17,9 +18,11 @@ class Company
     @@all ||= HTTParty.get(BASE_URI)
   end
 
-  def read_performance(start_date = (Date.today - 30).digify, end_date = Date.today.digify)
+  def read_performance(start_date = (Date.today - 30), end_date = Date.today)
+    start_date = start_date.digify
+    end_date = end_date.digify
     response = HTTParty.get("#{BASE_URI}/#{@symbol}?startdate=#{start_date}&enddate=#{end_date}")
-    response['prices']
+    response
   end
 
   def to_json
