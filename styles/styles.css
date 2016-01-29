@@ -7883,12 +7883,13 @@ button.close {
 .fa-percent:before {
   content: ""; }
 
-.form {
-  margin-top: 5%;
-  width: 18%; }
-  .form input {
+#entries .form {
+  margin-top: 5%; }
+  #entries .form input {
     font-size: large; }
-  .form .tt-selectable:hover {
+    #entries .form input.datepicker {
+      width: 59%; }
+  #entries .form .tt-selectable:hover {
     cursor: pointer; }
 
 .day {

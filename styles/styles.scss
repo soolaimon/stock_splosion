@@ -3,15 +3,19 @@
 @import "../bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
 
-.form {
-  margin-top: 5%;
-  width: 18%;
-  input {
-    font-size: large;
-  }
-  .tt-selectable {
-    &:hover {
-      cursor: pointer;
+#entries {
+  .form {
+    margin-top: 5%;
+    input {
+      font-size: large;
+      &.datepicker{
+        width: 59%;
+      }
+    }
+    .tt-selectable {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
