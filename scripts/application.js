@@ -1,43 +1,60 @@
 $(document).ready(function () {
-  $('.datepicker').datepicker({
-    autoclose: true,
-    endDate: '0d',
-  });
-    var search = new Bloodhound({
-         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-         queryTokenizer: Bloodhound.tokenizers.whitespace,
-         remote: {
-            url: '/search?query=' + '%QUERY',
-            wildcard: '%QUERY'
-         }
-     });
-
-    $('.typeahead').typeahead({
-        highlight: true,
-      },
-      {
-        name: 'companies',
-        display: 'symbol',
-        source: search,
-        templates: {
-          header: '<h3>Select a Company</h3>',
-            empty: [
-              '<div class="empty-message">',
-                'Unable to find any Best Picture winners that match the current query',
-              '</div>'
-            ].join('\n'),
-        }
+    $('.datepicker').datepicker({
+      autoclose: true,
+      endDate: '0d',
     });
+
+    loadSearcher();
+
+
+
+});
+
+var loadSearcher = function() {
+  var search = new Bloodhound({
+       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+       queryTokenizer: Bloodhound.tokenizers.whitespace,
+       remote: {
+          url: '/search?query=' + '%QUERY',
+          wildcard: '%QUERY'
+       }
+   });
+
+  $('.typeahead').typeahead({
+      highlight: true,
+    },
+    {
+      name: 'companies',
+      display: 'symbol',
+      source: search,
+      templates: {
+        header: '<h3>Select a Company</h3>',
+          empty: [
+            '<div class="empty-message">',
+              'Unable to find any Best Picture winners that match the current query',
+            '</div>'
+          ].join('\n'),
+      }
+  });
 
    $('.typeahead').bind('typeahead:select typeahead:autocomplete', function(event, suggestion) {
       $(this).trigger('typeahead:close');
-      startDate = moment($('#start-date').val()).format('DD/MM/YYYY')
-      endDate = moment($('#end-date').val()).format('DD/MM/YYYY')
-      calculatePerformance($(this).val(), startDate, endDate);
+      calculatePerformance();
     });
-});
+}
 
-var calculatePerformance = function(symbol, startDate, endDate) {
+$(document).on('change', '.adjustable', function() {
+  calculatePerformance();
+})
+
+
+var calculatePerformance = function() {
+  var symbol = $('#search').val();
+  var startDate = moment($('#start-date').val()).format('DD/MM/YYYY');
+  var endDate = moment($('#end-date').val()).format('DD/MM/YYYY');
+  $('#start-date').addClass('adjustable');
+  $('#end-date').addClass('adjustable');
+
   $.ajax({
     url: '/performance',
     type: 'GET',
