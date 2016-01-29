@@ -1,41 +1,40 @@
-$(document).ready(function () {
-    loadSearcher();
+$(document).ready(function() {
+  loadSearcher();
 });
 
 var loadSearcher = function() {
   var search = new Bloodhound({
-       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-       queryTokenizer: Bloodhound.tokenizers.whitespace,
-       remote: {
-          url: '/search?query=' + '%QUERY',
-          wildcard: '%QUERY'
-       }
-   });
-
-  $('.typeahead').typeahead({
-      highlight: true,
-    },
-    {
-      name: 'companies',
-      display: 'symbol',
-      source: search,
-      templates: {
-        header: '<h3>Select a Company</h3>',
-          empty: [
-            '<div class="empty-message">',
-              'Unable to find any Best Picture winners that match the current query',
-            '</div>'
-          ].join('\n'),
-      }
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: '/search?query=' + '%QUERY',
+      wildcard: '%QUERY'
+    }
   });
 
-   $('.typeahead').bind('typeahead:select typeahead:autocomplete', function(event, suggestion) {
-      $(this).trigger('typeahead:close');
-      calculatePerformance();
-    });
-   $('.typeahead').bind('typeahead:open', function() {
-     $('#position').empty();
-   })
+  $('.typeahead').typeahead({
+    highlight: true,
+  }, {
+    name: 'companies',
+    display: 'symbol',
+    source: search,
+    templates: {
+      header: '<h3>Select a Company</h3>',
+      empty: [
+        '<div class="empty-message">',
+        'Unable to find any Best Picture winners that match the current query',
+        '</div>'
+      ].join('\n'),
+    }
+  });
+
+  $('.typeahead').bind('typeahead:select typeahead:autocomplete', function(event, suggestion) {
+    $(this).trigger('typeahead:close');
+    calculatePerformance();
+  });
+  $('.typeahead').bind('typeahead:open', function() {
+    $('#position').empty();
+  })
 }
 
 var calculatePerformance = function() {
@@ -45,59 +44,58 @@ var calculatePerformance = function() {
     type: 'GET',
     dataType: 'json',
     async: false,
-    data: {symbol: symbol},
-    success: function (data, textStatus, jqXHR) {
+    data: {
+      symbol: symbol
+    },
+    success: function(data, textStatus, jqXHR) {
       var body = jqXHR.responseJSON;
       drawChart(body);
     },
-    error: function (jqXHR, textStatus, errorThrown) {
-    }
+    error: function(jqXHR, textStatus, errorThrown) {}
   });
 
 }
 
 var drawChart = function(data) {
-  if (window.chart){
+  if (window.chart) {
     window.chart.destroy();
   }
   var prices = [];
-  var dates = $.map(Object.keys(data.prices), function (date) {
+  var dates = $.map(Object.keys(data.prices), function(date) {
     prices.push(data.prices[date]);
     return moment(date).format('MM/DD/YYYY');
   });
   $('#company-name').text(data.company.name)
   $('#position').text(data.position)
   var data = {
-      labels: dates,
-      datasets: [
-          {
-              label: data.company.name,
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: prices
-          },
-      ]
+    labels: dates,
+    datasets: [{
+      label: data.company.name,
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: prices
+    }, ]
   };
-   var options = {
-      scaleShowGridLines : true,
-      scaleGridLineColor : "rgba(0,0,0,.05)",
-      scaleGridLineWidth : 1,
-      scaleShowHorizontalLines: true,
-      scaleShowVerticalLines: true,
-      bezierCurve : true,
-      bezierCurveTension : 0.4,
-      pointDot : true,
-      pointDotRadius : 4,
-      pointDotStrokeWidth : 1,
-      pointHitDetectionRadius : 20,
-      datasetStroke : true,
-      datasetStrokeWidth : 2,
-      datasetFill : true,
-    };
+  var options = {
+    scaleShowGridLines: true,
+    scaleGridLineColor: "rgba(0,0,0,.05)",
+    scaleGridLineWidth: 1,
+    scaleShowHorizontalLines: true,
+    scaleShowVerticalLines: true,
+    bezierCurve: true,
+    bezierCurveTension: 0.4,
+    pointDot: true,
+    pointDotRadius: 4,
+    pointDotStrokeWidth: 1,
+    pointHitDetectionRadius: 20,
+    datasetStroke: true,
+    datasetStrokeWidth: 2,
+    datasetFill: true,
+  };
   var ctx = document.getElementById("myChart").getContext("2d");
   performanceChart = new Chart(ctx).Line(data, options);
   window.chart = performanceChart
