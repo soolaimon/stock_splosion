@@ -31,7 +31,9 @@ $(document).ready(function () {
 
    $('.typeahead').bind('typeahead:select typeahead:autocomplete', function(event, suggestion) {
       $(this).trigger('typeahead:close');
-      calculatePerformance($(this).val(), $('#start-date').val(), $('#end-date').val());
+      startDate = moment($('#start-date').val()).format('DD/MM/YYYY')
+      endDate = moment($('#end-date').val()).format('DD/MM/YYYY')
+      calculatePerformance($(this).val(), startDate, endDate);
     });
 });
 
@@ -42,15 +44,20 @@ var calculatePerformance = function(symbol, startDate, endDate) {
     dataType: 'json',
     async: false,
     data: {symbol: symbol, start_date: startDate, end_date: endDate},
-    complete: function (jqXHR, textStatus) {
-      // callback
-    },
     success: function (data, textStatus, jqXHR) {
-      // success callback
+      var body = jqXHR.responseJSON;
+      drawChart(body);
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      // error callback
     }
   });
 
+}
+
+var drawChart = function(data) {
+  var prices = [];
+  var dates = $.map(Object.keys(data.prices), function (date) {
+    prices.push(data.prices[date]);
+    return moment(date).format('MM/DD/YYYY');
+  });
 }
