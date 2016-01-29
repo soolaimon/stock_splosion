@@ -1,13 +1,5 @@
 $(document).ready(function () {
-    $('.datepicker').datepicker({
-      autoclose: true,
-      endDate: '0d',
-    });
-
     loadSearcher();
-
-
-
 });
 
 var loadSearcher = function() {
@@ -43,24 +35,14 @@ var loadSearcher = function() {
     });
 }
 
-$(document).on('change', '.adjustable', function() {
-  calculatePerformance();
-})
-
-
 var calculatePerformance = function() {
   var symbol = $('#search').val();
-  var startDate = moment($('#start-date').val()).format('DD/MM/YYYY');
-  var endDate = moment($('#end-date').val()).format('DD/MM/YYYY');
-  $('#start-date').addClass('adjustable');
-  $('#end-date').addClass('adjustable');
-
   $.ajax({
     url: '/performance',
     type: 'GET',
     dataType: 'json',
     async: false,
-    data: {symbol: symbol, start_date: startDate, end_date: endDate},
+    data: {symbol: symbol},
     success: function (data, textStatus, jqXHR) {
       var body = jqXHR.responseJSON;
       drawChart(body);

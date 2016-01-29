@@ -12,9 +12,7 @@ end
 
 get '/performance' do
   company = Company.new('symbol' => params[:symbol])
-  start_date = Date.parse(params[:start_date])
-  end_date = Date.parse(params[:end_date])
-  json company.read_performance(start_date, end_date)
+  json company.read_performance
 end
 
 get '/search' do
