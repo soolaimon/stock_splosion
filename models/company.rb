@@ -22,7 +22,20 @@ class Company
     start_date = start_date.digify
     end_date = end_date.digify
     response = HTTParty.get("#{BASE_URI}/#{@symbol}?startdate=#{start_date}&enddate=#{end_date}")
+    response["position"] = calculate(response["prices"].values)
     response
+  end
+
+  def calculate data
+    sum = data.reduce(:+)
+    avg = sum data.size
+    if data.last > avg
+      "SELL"
+    elsif data.last < avg
+      "BUY"
+    else
+      "WAIT"
+    end
   end
 
   def to_json
