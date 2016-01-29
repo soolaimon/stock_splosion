@@ -9,6 +9,10 @@ get '/' do
   erb :index
 end
 
+get '/performance' do
+  require 'pry'; binding.pry
+  puts 'blah'
+end
 
 get '/search' do
   query = params[:query].downcase
@@ -16,3 +20,4 @@ get '/search' do
   companies = companies.select {|c| c.symbol.downcase.include? query}
   json companies.map { |c| c.to_json }
 end
+

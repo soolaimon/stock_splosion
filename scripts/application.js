@@ -14,7 +14,6 @@ $(document).ready(function () {
 
     $('.typeahead').typeahead({
         highlight: true,
-        hint: true
       },
       {
         name: 'companies',
@@ -30,11 +29,28 @@ $(document).ready(function () {
         }
     });
 
-    $('.typeahead').bind('typeahead:select', function(event, suggestion) {
-      calculatePerformance($(this).val());
-    })
+   $('.typeahead').bind('typeahead:select typeahead:autocomplete', function(event, suggestion) {
+      $(this).trigger('typeahead:close');
+      calculatePerformance($(this).val(), $('#start-date').val(), $('#end-date').val());
+    });
 });
 
 var calculatePerformance = function(symbol, startDate, endDate) {
+  $.ajax({
+    url: '/performance',
+    type: 'GET',
+    dataType: 'json',
+    async: false,
+    data: {symbol: symbol, start_date: startDate, end_date: endDate},
+    complete: function (jqXHR, textStatus) {
+      // callback
+    },
+    success: function (data, textStatus, jqXHR) {
+      // success callback
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      // error callback
+    }
+  });
 
 }

@@ -7890,7 +7890,8 @@ button.close {
     font-size: large; }
   .form .tt-selectable:hover {
     cursor: pointer; }
-  .form .day {
-    cursor: pointer; }
+
+.day {
+  cursor: pointer; }
 
 /*# sourceMappingURL=styles.css.map */
