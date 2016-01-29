@@ -60,4 +60,39 @@ var drawChart = function(data) {
     prices.push(data.prices[date]);
     return moment(date).format('MM/DD/YYYY');
   });
+  console.log(prices);
+  var data = {
+      labels: dates,
+      datasets: [
+          {
+              label: "My First dataset",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: prices
+          },
+      ]
+  };
+   var options = {
+      scaleShowGridLines : true,
+      scaleGridLineColor : "rgba(0,0,0,.05)",
+      scaleGridLineWidth : 1,
+      scaleShowHorizontalLines: true,
+      scaleShowVerticalLines: true,
+      bezierCurve : true,
+      bezierCurveTension : 0.4,
+      pointDot : true,
+      pointDotRadius : 4,
+      pointDotStrokeWidth : 1,
+      pointHitDetectionRadius : 20,
+      datasetStroke : true,
+      datasetStrokeWidth : 2,
+      datasetFill : true,
+    };
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var performanceChart = new Chart(ctx).Line(data, options);
+
 }
