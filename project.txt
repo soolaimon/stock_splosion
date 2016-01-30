@@ -1,0 +1,9 @@
+Time Summary
+- Tools and environment setup (sinatra, grunt, assets) - 2
+- Backend models and API integration - 2
+- Front End (Suggestive search, chart, wiring with backend): 4 hours
+
+7 hours * $150:
+Toal: $1,050
+
+
