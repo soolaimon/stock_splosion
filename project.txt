@@ -1,4 +1,5 @@
-Approach:
+Approach
+
 - At first I wanted to modulize the API interaction, so I created a StockSplosion module
 to include in the Company model. I came to realize that I didn't even know how this should work,
 and probably wouldn't until the project grew and I needed to interact with more 3rd party APIs, at which
@@ -8,7 +9,7 @@ interaction into Company.
 - Company is just a domain level model. The use case did not necessitate persisting data.
 
 - I chose not to use anything more robust than jQuery on the front end. If the project were to stay as is with
-only minor changes, this would make the most sense as it caused little overhead/ramp up time. However, you never really know,
+only minor changes, this would make the most sense as it caused little overhead/ramp up time. However, you never really know
 what will become of a project, so perhaps defaulting to a framework from the beginning is the best route. Redoing this
 with something like React.js wouldn't take too long.
 
@@ -16,6 +17,7 @@ with something like React.js wouldn't take too long.
 discussion with stakeholders. In the meantime, I feel the  general "buy low, sell high" philosophy is a good placeholder
 
 Time Summary
+
 - Tools and environment setup (sinatra, grunt, assets) - 2
 - Backend models and API integration - 2
 - Front End (Suggestive search, chart, wiring with backend): 4 hours
