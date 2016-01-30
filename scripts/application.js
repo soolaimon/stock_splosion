@@ -22,7 +22,7 @@ var loadSearcher = function() {
       header: '<h3>Select a Company</h3>',
       empty: [
         '<div class="empty-message">',
-        'Unable to find any Best Picture winners that match the current query',
+        'Unable to find any companies that match the current query',
         '</div>'
       ].join('\n'),
     }
