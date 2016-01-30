@@ -4,6 +4,6 @@ Time Summary
 - Front End (Suggestive search, chart, wiring with backend): 4 hours
 
 7 hours * $150:
-Toal: $1,050
+Total: $1,050
 
 
