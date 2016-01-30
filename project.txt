@@ -14,7 +14,8 @@ what will become of a project, so perhaps defaulting to a framework from the beg
 with something like React.js wouldn't take too long.
 
 - Determining criteria for a "position" (buy, sell, wait) is a business requirement that will probably warrant more
-discussion with stakeholders. In the meantime, I feel the  general "buy low, sell high" philosophy is a good placeholder
+discussion with stakeholders. In the meantime, I feel the  general "buy low, sell high" philosophy is a good placeholder,
+so I based it on whether current price is above or below average.
 
 Time Summary
 
